@@ -1,0 +1,19 @@
+﻿@model TheRecipeBox.Repositories.FakeRecipeRepository
+
+<h2>@ViewData["Title"]</h2>
+<h1>Hello</h1>
+@Model.Recipes.Count
+
+@foreach (var r in Model.Recipes)
+{
+    <div class="col-sm-4 col-lg-4 col-md-4">
+        <div class="thumbnail">
+            <img src="@r.ImgUrl" alt="" />
+            <div class="caption">
+                <h3>
+                    <a asp-controller="Recipe" asp-action="RecipeDetail" asp-route-id="@r.RecipeID">@r.Name</a>
+                </h3>
+            </div>
+        </div>
+    </div>
+}

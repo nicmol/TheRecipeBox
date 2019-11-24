@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace TheRecipeBox.Models
 {
-    public class RecipeRepository
+    public class Unit
     {
+        public string Name { get; set; }
+        public string UnitType { get; set; }
     }
 }
