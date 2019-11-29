@@ -10,44 +10,49 @@ namespace TheRecipeBox.Repositories
     {
         public FakeRecipeRepository()
         {
-            Unit cup = new Unit
+            if (recipes == null)
             {
-                Name = "cup"
-            };
+                recipes = new List<Recipe>();
+                Unit cup = new Unit
+                {
+                    Name = "cup"
+                };
 
-            Ingredient lettuce = new Ingredient
-            {
-                IngredientName = "lettuce",
-                Quantity = 1,
-                Measure = cup
-            };
-            Ingredient tomatoes = new Ingredient
-            {
-                IngredientName = "tomatoes",
-                Quantity = .5,
-                Measure = cup
-            };
+                Ingredient lettuce = new Ingredient
+                {
+                    IngredientName = "lettuce",
+                    Quantity = 1,
+                    Measure = cup
+                };
+                Ingredient tomatoes = new Ingredient
+                {
+                    IngredientName = "tomatoes",
+                    Quantity = .5,
+                    Measure = cup
+                };
 
-            Recipe salad = new Recipe
-            {
-                RecipeID = 1,
-                Name = "salad",
-                Servings = 2,
-                Instructions = "Toss ingredients.",
-                Date = DateTime.Now,
-                Rating = 5
-               
-            };
+                Recipe salad = new Recipe
+                {
+                    Name = "salad",
+                    Servings = 2,
+                    Instructions = "Toss ingredients.",
+                    Date = DateTime.Now,
+                    Rating = 5,
+                    ImgUrl = "/images/lettuce-tomato-salad.jpg"
+                };
 
-            salad.AddIngredient(lettuce);
-            salad.AddIngredient(tomatoes);
-            AddRecipe(salad);
+                salad.AddIngredient(lettuce);
+                salad.AddIngredient(tomatoes);
+                AddRecipe(salad);
+            }
+    
         }
 
-        private static List<Recipe> recipes = new List<Recipe>();
+        private static List<Recipe> recipes;
         public List<Recipe> Recipes { get { return recipes; } }
         public void AddRecipe(Recipe recipe)
         {
+            recipe.RecipeID = GetMaxId() + 1;
             Recipes.Add(recipe);
         }
 
@@ -59,6 +64,23 @@ namespace TheRecipeBox.Repositories
         public IEnumerable<Recipe> GetRecipes()
         {
             return recipes;
+        }
+
+        public int GetMaxId()
+        {
+            if(recipes.Count == 0)
+            {
+                return 0;
+            }
+            int maxId = int.MinValue;
+            foreach(Recipe r in recipes)
+            {
+                if(r.RecipeID > maxId)
+                {
+                    maxId = r.RecipeID;
+                }
+            }
+            return maxId;
         }
     }
 }

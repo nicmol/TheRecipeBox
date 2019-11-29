@@ -1,0 +1,23 @@
+﻿@model TheRecipeBox.Models.Recipe
+@{
+    ViewData["Title"] = "AddRecipe";
+}
+
+<h1>AddRecipe</h1>
+<form asp-action="AddRecipe" method="post">
+    <div class="form-group">
+        <label asp-for="Name">Recipe Name:</label>
+        <input class="form-control col-6" name="name" asp-for="Name" /><br />
+    </div>
+    <div class="form-group">
+        <label asp-for="Servings">Serves:</label>
+        <input class="form-control col-6" name="servings" asp-for="Servings" /><br />
+    </div>
+     <div class="form-group">
+        <label asp-for="Instructions">Instructions:</label>
+        <textarea class="form-control col-6" asp-for="Instructions"></textarea><br />
+    </div>
+    <div class="form-group">
+        <button asp-controller="Recipe" asp-action="AddRecipe" class="btn btn-default" type="submit">Add Recipe</button>
+    </div>
+</form>

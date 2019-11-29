@@ -1,7 +1,27 @@
-﻿
+﻿@model Recipe
 @{
     ViewData["Title"] = "RecipeDetail";
 }
 
-<h1>RecipeDetail</h1>
+<h1>@Model.Name</h1>
+<i>Serves: @Model.Servings</i><br />
+Rating: @Model.Rating<br />
+<img src="@Model.ImgUrl" />
+
+
+<br />
+<h3>Ingredients</h3>
+@foreach (var i in Model.Ingredients)
+{
+    @i.Quantity <text>&nbsp;</text>
+    @i.Measure.Name<text>&nbsp;</text> 
+    @i.IngredientName
+    <br />
+
+}
+<br />
+<h3>Instructions</h3>
+<span style="white-space:pre-line">@Model.Instructions</span>
+
+
 

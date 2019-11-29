@@ -12,9 +12,11 @@ namespace TheRecipeBox.Repositories
         public List<Recipe> Recipes { get { return recipes; } }
         public void AddRecipe(Recipe recipe)
         {
+            recipe.RecipeID = GetMaxId() + 1;
             Recipes.Add(recipe);
         }
 
+      
         public Recipe GetRecipeById(int recipeId)
         {
             return recipes.FirstOrDefault(r => r.RecipeID == recipeId);
@@ -23,6 +25,23 @@ namespace TheRecipeBox.Repositories
         public IEnumerable<Recipe> GetRecipes()
         {
             return recipes;
+        }
+
+        public int GetMaxId()
+        {
+            if (recipes.Count == 0)
+            {
+                throw new InvalidOperationException("Empty List");
+            }
+            int maxId = int.MinValue;
+            foreach (Recipe r in recipes)
+            {
+                if (r.RecipeID > maxId)
+                {
+                    maxId = r.RecipeID;
+                }
+            }
+            return maxId;
         }
     }
 

@@ -29,6 +29,23 @@ namespace TheRecipeBox.Controllers
             return View(recipe);
         }
 
-      
+        public IActionResult AddRecipe()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public RedirectToActionResult AddRecipe(string name, string servings, string instructions)
+        {
+            Recipe recipe = new Recipe();
+            recipe.Name = name;
+            recipe.Servings = Convert.ToInt32(servings);
+            recipe.Instructions = instructions;
+            recipe.Date = DateTime.Now;
+            repo.AddRecipe(recipe);
+
+            return RedirectToAction("RecipeDetail", new { id = recipe.RecipeID});
+
+        }
     }
 }
