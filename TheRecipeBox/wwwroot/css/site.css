@@ -5,8 +5,19 @@ a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+  
 }
-
+/*set Background Image*/
+body {
+    background-image: url('/images/recipe-box-transparent.png');
+    background-size: cover;
+    /*opacity: 0.5;*/
+}
+/*sets transparency on list group*/
+.transparent {
+    background: #7f7f7f;
+    background: rgba(255,255,255,0.5);
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
