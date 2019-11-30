@@ -13,9 +13,8 @@
         <label asp-for="Servings">Serves:</label>
         <input class="form-control col-6" name="servings" asp-for="Servings" /><br />
     </div>
-    
+    <label>Ingredients:</label>
     <div id="ingredientInputList">
-        <label>Ingredients:</label>
         <div class="form-group">
             <input class="form-control col-2" name="ingredients[0].Quantity" asp-for="Ingredients[0].Quantity" placeholder="Quantity" />
             <input class="form-control col-2" name="ingredients[0].Measure" asp-for="Ingredients[0].Measure" placeholder="Measure" />
