@@ -9,6 +9,6 @@ namespace TheRecipeBox.Models
     {
         public string IngredientName { get; set; }
         public double Quantity { get; set; }
-        public Unit Measure { get; set; }
+        public string Measure { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace TheRecipeBox.Models
             //sets new recipe image to default image
             if (ImgUrl == null)
             {
-                ImgUrl = "/images/recipeImgPlaceholder.png";
+                ImgUrl = "/images/PlaceHolderIcon.png";
             }
         }
         
@@ -24,6 +24,7 @@ namespace TheRecipeBox.Models
         public double Rating { get; set; }
         public string ImgUrl { get; set; }
 
+
         private List<Ingredient> ingredients = new List<Ingredient>();
         public List<Ingredient> Ingredients { get { return ingredients; } }
 
@@ -32,7 +33,7 @@ namespace TheRecipeBox.Models
             ingredients.Add(ingredient);
         }
 
-      
+
 
 
     }

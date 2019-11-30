@@ -1,4 +1,11 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿function addFields() {
+    var container = document.getElementById("ingredientInputList");
+    var countOfChildren = container.childElementCount;
+    var html = `<div class="form-group">
+                <input class="form-control col-2" name="ingredients[${countOfChildren}].Quantity" asp-for="Ingredients[${countOfChildren}].Quantity" placeholder="Quantity" />
+                <input class="form-control col-2" name="ingredients[${countOfChildren}].Measure" asp-for="Ingredients[${countOfChildren}].Measure" placeholder="Measure" />
+                <input class="form-control col-2" name="ingredients[${countOfChildren}].IngredientName" asp-for="Ingredients[${countOfChildren}].IngredientName" placeholder="IngredientName" /><br />
+                </div>
+`;
+    container.insertAdjacentHTML("beforeend", html);
+}

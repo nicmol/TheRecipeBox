@@ -35,14 +35,19 @@ namespace TheRecipeBox.Controllers
         }
 
         [HttpPost]
-        public RedirectToActionResult AddRecipe(string name, string servings, string instructions)
+        public RedirectToActionResult AddRecipe(string name, string servings, string instructions, List<Ingredient> ingredients)
         {
             Recipe recipe = new Recipe();
             recipe.Name = name;
             recipe.Servings = Convert.ToInt32(servings);
             recipe.Instructions = instructions;
             recipe.Date = DateTime.Now;
+            foreach(Ingredient i in ingredients)
+            {
+                recipe.AddIngredient(i);
+            }
             repo.AddRecipe(recipe);
+
 
             return RedirectToAction("RecipeDetail", new { id = recipe.RecipeID});
 

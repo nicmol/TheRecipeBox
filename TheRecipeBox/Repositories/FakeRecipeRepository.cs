@@ -13,22 +13,18 @@ namespace TheRecipeBox.Repositories
             if (recipes == null)
             {
                 recipes = new List<Recipe>();
-                Unit cup = new Unit
-                {
-                    Name = "cup"
-                };
-
+          
                 Ingredient lettuce = new Ingredient
                 {
                     IngredientName = "lettuce",
                     Quantity = 1,
-                    Measure = cup
+                    Measure = "cup"
                 };
                 Ingredient tomatoes = new Ingredient
                 {
                     IngredientName = "tomatoes",
                     Quantity = .5,
-                    Measure = cup
+                    Measure = "cup"
                 };
 
                 Recipe salad = new Recipe
