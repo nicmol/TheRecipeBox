@@ -37,12 +37,13 @@ namespace TheRecipeBox.Tests
             //Arrange
             var repo = new FakeRecipeRepository();
             var recipeController = new RecipeController(repo);
-            
+
 
             //Act
             //RecipeController.RecipeDetail
-            
-           //Assert
+
+            //Assert
         }
 
+    }
 }
