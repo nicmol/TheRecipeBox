@@ -7,6 +7,15 @@ Recipes Found: @Model.Recipes.Count
 <br />
 @foreach (var r in Model.Recipes)
 {
+<form method="post">
+    <div class="form-group">
+        <label for="search">Search:</label>
+        <input class="form-control col-6" name="search" /><br />
+    </div>
+    <div class="form-group">
+        <button class="btn btn-default" type="submit">Search</button>
+    </div>
+</form>
     <div class="media transparent" style="border: 1px ridge blue; padding: 3px;">
         <div class="media-left">
             <img src="@r.ImgUrl" class="media-object" style="width: 50px; margin-right: 5px;" />
@@ -21,4 +30,4 @@ Recipes Found: @Model.Recipes.Count
 
         </div>
     </div>
-}
+    }
