@@ -45,5 +45,4 @@ namespace TheRecipeBox.Tests
            //Assert
         }
 
-    }
 }
