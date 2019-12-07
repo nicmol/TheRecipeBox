@@ -20,6 +20,18 @@ namespace TheRecipeBox.Models
         public string Name { get; set; }
         public int Servings { get; set; }
         public string Instructions { get; set; }
+
+        public void AddIngredient(string ingredientName, int quantity, string measure)
+        {
+            Ingredient ingredient = new Ingredient
+            {
+                IngredientName = ingredientName,
+                Quantity = quantity,
+                Measure = measure
+            };
+            ingredients.Add(ingredient);
+        }
+
         public DateTime Date { get; set; }
         public double Rating { get; set; }
         public string ImgUrl { get; set; }

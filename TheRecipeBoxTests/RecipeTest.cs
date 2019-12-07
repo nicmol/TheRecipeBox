@@ -31,19 +31,6 @@ namespace TheRecipeBox.Tests
                 repo.Recipes[repo.Recipes.Count - 1].Name);
         }
 
-        [Fact]
-        public void RecipeDetailTest()
-        {
-            //Arrange
-            var repo = new FakeRecipeRepository();
-            var recipeController = new RecipeController(repo);
-
-
-            //Act
-            //RecipeController.RecipeDetail
-
-            //Assert
-        }
 
     }
 }
