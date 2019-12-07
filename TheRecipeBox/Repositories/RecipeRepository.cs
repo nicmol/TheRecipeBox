@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,33 +9,48 @@ namespace TheRecipeBox.Repositories
 {
     public class RecipeRepository : IRecipeRepository
     {
-        private static List<Recipe> recipes = new List<Recipe>();
-        public List<Recipe> Recipes { get { return recipes; } }
+        public RecipeRepository(AppDbContext context)
+        {
+            _context = context;
+        }
+        private readonly AppDbContext _context;
+
+        public List<Recipe> Recipes
+        {
+            get
+            {
+                return _context.Recipes.Include("Ingredients").ToList();
+            }
+        }
+
+        
         public void AddRecipe(Recipe recipe)
         {
-            recipe.RecipeID = GetMaxId() + 1;
-            Recipes.Add(recipe);
+           
+            _context.Recipes.Add(recipe);
+            _context.SaveChanges();
         }
 
       
         public Recipe GetRecipeById(int recipeId)
         {
-            return recipes.FirstOrDefault(r => r.RecipeID == recipeId);
+            Recipe recipe = Recipes.Find(r => r.RecipeID == recipeId);
+            return recipe;
         }
 
         public IEnumerable<Recipe> GetRecipes()
         {
-            return recipes;
+            return Recipes;
         }
 
         public int GetMaxId()
         {
-            if (recipes.Count == 0)
+            if (Recipes.Count == 0)
             {
                 throw new InvalidOperationException("Empty List");
             }
             int maxId = int.MinValue;
-            foreach (Recipe r in recipes)
+            foreach (Recipe r in Recipes)
             {
                 if (r.RecipeID > maxId)
                 {
@@ -42,6 +58,15 @@ namespace TheRecipeBox.Repositories
                 }
             }
             return maxId;
+        }
+        //Searches for recipe
+        public IEnumerable<Recipe> GetRecipesSearch(string search)
+        {
+            if(search == null)
+            {
+                return Recipes;
+            }
+            return _context.Recipes.Where(r => EF.Functions.Like(r.Name, search)).Include("Ingredients");
         }
     }
 

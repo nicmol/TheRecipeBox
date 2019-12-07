@@ -16,16 +16,32 @@ namespace TheRecipeBox.Controllers
             repo = r;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
-            return View(repo);
+            return View(repo.GetRecipesSearch(search));
         }
 
-        public IActionResult RecipeDetail(int id)
+        public IActionResult RecipeDetail(int id, int servings)
         {
             var recipe = repo.GetRecipeById(id);
             if (recipe == null)
+            {
                 return NotFound();
+            }
+                
+            if(servings == 0)
+            {
+                return View(recipe);
+            }
+
+            
+            double multiplier = (double)servings / recipe.Servings;
+            foreach (Ingredient i in recipe.Ingredients)
+            {
+
+                i.Quantity = i.Quantity * multiplier;
+            }
+            recipe.Servings = servings;
             return View(recipe);
         }
 

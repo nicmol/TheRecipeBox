@@ -78,5 +78,10 @@ namespace TheRecipeBox.Repositories
             }
             return maxId;
         }
+
+        public IEnumerable<Recipe> GetRecipesSearch(string search)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

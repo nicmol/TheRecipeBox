@@ -12,5 +12,6 @@ namespace TheRecipeBox.Repositories
         void AddRecipe(Recipe recipe);
         Recipe GetRecipeById(int recipeId);
         int GetMaxId();
+        IEnumerable<Recipe> GetRecipesSearch(string search);
     }
 }

@@ -21,7 +21,7 @@ namespace TheRecipeBox.Models
         public int Servings { get; set; }
         public string Instructions { get; set; }
 
-        public void AddIngredient(string ingredientName, int quantity, string measure)
+        public void AddIngredient(string ingredientName, double quantity, string measure)
         {
             Ingredient ingredient = new Ingredient
             {
@@ -29,7 +29,7 @@ namespace TheRecipeBox.Models
                 Quantity = quantity,
                 Measure = measure
             };
-            ingredients.Add(ingredient);
+            Ingredients.Add(ingredient);
         }
 
         public DateTime Date { get; set; }
@@ -42,7 +42,7 @@ namespace TheRecipeBox.Models
 
         public void AddIngredient(Ingredient ingredient)
         {
-            ingredients.Add(ingredient);
+            Ingredients.Add(ingredient);
         }
 
 

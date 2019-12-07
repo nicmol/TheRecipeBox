@@ -4,25 +4,29 @@
 }
 
 <h1>@Model.Name</h1>
-<i>Serves: @Model.Servings</i><br />
-Rating: @Model.Rating<br />
-<img src="@Model.ImgUrl" style="width: 300px;" />
 
 
-<br />
-<h3>Ingredients</h3>
-@foreach (var i in Model.Ingredients)
-{
-    @i.Quantity <text>&nbsp;</text>
-    @i.Measure <text>&nbsp;</text> 
-    @i.IngredientName
+<form asp-action="RecipeDetail" method="post">
+    <div class="form-group">
+        <i>Serves: <input class="form-control col-1" name="servings" asp-for="Servings" value="@Model.Servings" /></i>
+        <button asp-controller="Recipe" asp-action="RecipeDetail" class="btn btn-default" type="submit">Update Servings</button><br />
+        Rating: @Model.Rating<br />
+        <img src="@Model.ImgUrl" style="width: 300px;" />
+        <br />
+    </div>
+    </form>
+   <br />
+    <h3>Ingredients</h3>
+    @foreach (var i in Model.Ingredients)
+    {
+        @i.Quantity <text>&nbsp;</text>
+        @i.Measure <text>&nbsp;</text>
+        @i.IngredientName
+        <br />
+    }
     <br />
-
-
-}
-<br />
-<h3>Instructions</h3>
-<span style="white-space:pre-line">@Model.Instructions</span>
+    <h3>Instructions</h3>
+    <span style="white-space:pre-line">@Model.Instructions</span>
 
 
 
