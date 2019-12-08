@@ -17,11 +17,13 @@ namespace TheRecipeBox
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            environment = env;
         }
-
+        private IHostingEnvironment environment;
         public IConfiguration Configuration { get; }
 
 
@@ -41,11 +43,18 @@ namespace TheRecipeBox
             // Inject our repositories into our controllers
             services.AddTransient<IRecipeRepository, RecipeRepository>();
 
-        
+
             //configures DbContext to datatbase
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:ConnectionString"]));
+            if (environment.IsDevelopment())
+            {
+                services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:ConnectionString"]));
+            }
+            else if (environment.IsProduction())
+            {
+                services.AddDbContext<AppDbContext>(options => options.UseMySql(
+                    Configuration["ConnectionStrings:ConnectionString"]));
+            }
         }
-    
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, AppDbContext context)
@@ -64,6 +73,8 @@ namespace TheRecipeBox
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            context.Database.Migrate();
+            DbInitializer.Seed(context);
 
             app.UseMvc(routes =>
             {
@@ -71,14 +82,8 @@ namespace TheRecipeBox
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            // Create or update the database and apply migrations.
-            context.Database.Migrate();
-            DbInitializer.Seed(context);
+                        
         }
-        
-   
-
-          
+                  
     }
 }
