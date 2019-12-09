@@ -66,7 +66,7 @@ namespace TheRecipeBox.Repositories
             {
                 return Recipes;
             }
-            return _context.Recipes.Where(r => EF.Functions.Like(r.Name, search)).Include("Ingredients");
+            return _context.Recipes.Where(r => EF.Functions.Like(r.Name, "%" + search + "%")).Include("Ingredients");
         }
     }
 
